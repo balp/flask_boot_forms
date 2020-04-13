@@ -1,0 +1,17 @@
+{%- extends "bootstrap/base.html" %}
+
+{% block html_attribs %} lang="en"{% endblock %}
+
+{% block title %}Flask-Bootstrap: Hack Thingy{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet"
+          href="{{ url_for('.static', filename='mystyle.css') }}">
+{% endblock %}
+
+{% block metas %}
+    <meta charset="utf-8">
+    {{ super() }}
+{% endblock %}
+
