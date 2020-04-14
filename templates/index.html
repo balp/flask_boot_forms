@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "bootstrap/utils.html" as utils %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% from "_formhelpers.html" import render_field %}
 
@@ -13,22 +14,39 @@
 {% block content %}
 
     <div class="container">
-        {% if name %}
-            <h1>Welcome, {{ name }}</h1>
-        {% else %}
-            <h1>Your name please</h1>
-        {% endif %}
+        {%- with messages = get_flashed_messages(with_categories=True) %}
+            {%- if messages %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ utils.flashed_messages(messages) }}
+                    </div>
+                </div>
+            {%- endif %}
+        {%- endwith %}
+        <div class="row">
 
-        <form method="POST" action="/">
-            {{ form.csrf_token }}
-            {{ wtf.form_field(form.name, class='form-control',
+            {% if name %}
+                <h1>Welcome, {{ name }}</h1>
+            {% else %}
+                <h1>Your name please</h1>
+            {% endif %}
+        </div>
+        <div class="row">
+            <form method="POST" action="/">
+                {{ form.csrf_token }}
+                {{ wtf.form_field(form.name, class='form-control',
                placeholder='Write down your name here...') }}
-            <input type="submit" value="Go">
-        </form>
+                {{ wtf.form_field(form.target, class='form-control',
+               placeholder='And the target number... between 0 and ' + range ) }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-4">Roll</div>
+            <div class="col-sm-4" id="roll_value"></div>
+            <div class="col-sm-4" id="hit_value"></div>
+        </div>
     </div>
 {% endblock %}
 
-{% block scripts %}
-    <script src="{{ url_for('.static', filename='myscripts.js') }}"></script>
-    {{ super() }}
-{% endblock %}

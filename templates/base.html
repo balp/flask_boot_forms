@@ -6,6 +6,7 @@
 
 {% block styles %}
     {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet"
           href="{{ url_for('.static', filename='mystyle.css') }}">
 {% endblock %}
@@ -14,4 +15,19 @@
     <meta charset="utf-8">
     {{ super() }}
 {% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token() }}";
 
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
+            }
+        });
+    </script>
+    <script src="{{ url_for('.static', filename='myscripts.js') }}"></script>
+
+{% endblock %}
