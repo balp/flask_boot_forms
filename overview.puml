@@ -1,0 +1,10 @@
+@startuml
+
+node "Flask" {
+  [app] -left- root
+  [app] -right- random
+}
+
+[browser] ..> root
+[myscript] ..> random
+@enduml
