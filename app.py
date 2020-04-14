@@ -24,12 +24,11 @@ def create_app():
 
 app: Flask = create_app()
 name: Optional[str] = None
-target: int = 0
+target: int = randrange(MAX_NUMBER)
 hit_count: int = 0
 
 
 class MyForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
     target = DecimalField('target', validators=[DataRequired(), NumberRange(0, MAX_NUMBER)])
 
 
@@ -42,11 +41,11 @@ def index():
         global target
         target = int(form.target.data)
         return render_template('index.html',
-                               name=name,
+                               target=target,
                                range=str(MAX_NUMBER),
                                form=form)
     return render_template('index.html',
-                           name=name,
+                           target=target,
                            range=str(MAX_NUMBER),
                            form=form)
 

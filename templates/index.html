@@ -24,18 +24,11 @@
             {%- endif %}
         {%- endwith %}
         <div class="row">
-
-            {% if name %}
-                <h1>Welcome, {{ name }}</h1>
-            {% else %}
-                <h1>Your name please</h1>
-            {% endif %}
+            <h1>Dice roller: 0 to {{ range }} with target {{ target }}</h1>
         </div>
         <div class="row">
             <form method="POST" action="/">
                 {{ form.csrf_token }}
-                {{ wtf.form_field(form.name, class='form-control',
-               placeholder='Write down your name here...') }}
                 {{ wtf.form_field(form.target, class='form-control',
                placeholder='And the target number... between 0 and ' + range ) }}
                 <button type="submit" class="btn btn-primary">Submit</button>
