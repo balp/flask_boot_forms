@@ -63,13 +63,13 @@ dictConfig({
     'handlers': {
         'wsgi_error': {
             'class': 'logging.StreamHandler',
-            'stream': 'ext://flask.logging.wsgi_errors_stream',
+            'stream': 'ext://sys.stderr',
             'filters': ['warn_error_critical'],
             'formatter': 'default'
         },
         'wsgi_debug': {
             'class': 'logging.StreamHandler',
-            'stream': 'ext://flask.logging.wsgi_errors_stream',
+            'stream': 'ext://sys.stdout',
             'filters': ['info_debug'],
             'formatter': 'default'
         },
