@@ -7,7 +7,7 @@ from random import randrange
 from typing import Optional
 
 from flask import Flask, render_template, request, has_request_context
-from flask_bootstrap import Bootstrap
+from flask_bs4 import Bootstrap
 from flask_wtf import FlaskForm
 from flask_wtf.csrf import CSRFProtect
 from wtforms import DecimalField
